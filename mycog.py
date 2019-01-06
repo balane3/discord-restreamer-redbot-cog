@@ -52,3 +52,11 @@ class Mycog(commands.Cog):
         time.sleep(5) # wait a bit for icecast to be ready to serve the stream
         return await ctx.invoke(audiocog.play, query="http://localhost:8000/stream")
 
+
+    @commands.command()
+    async def stopstream(self, ctx):
+        audiocog = ctx.bot.get_cog("Audio")
+        if audiocog:
+            await ctx.invoke(audiocog.stop)
+        await ctx.invoke(self.unloadstream)
+
